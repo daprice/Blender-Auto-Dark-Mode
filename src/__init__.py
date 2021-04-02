@@ -39,6 +39,25 @@ class ADMAutoDarkMode(bpy.types.AddonPreferences):
         col.label(text = "Dark Mode Theme")
         col.menu("ADM_MT_dark_theme_preset", text=ADM_MT_dark_theme_preset.bl_label)
 
+class ADM_update_theme(bpy.types.Operator):
+    """Update Auto Dark Mode Theme"""
+    bl_idname="adm.update_theme"
+    bl_label = "Match current system theme"
+    
+    def execute(self, context):
+        preferences = context.preferences
+        addon_prefs = preferences.addons[__name__].preferences
+        
+        light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
+        dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
+        
+        if darkdetect.isDark():
+            bpy.ops.script.execute_preset(filepath=dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+        else:
+            bpy.ops.script.execute_preset(filepath=light_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+        
+        return {'FINISHED'}
+
 class ADM_set_light_theme(bpy.types.Operator):
     """Set Auto Light Mode Theme"""
     bl_idname = "adm.set_light_theme"
@@ -129,6 +148,7 @@ class ADM_MT_dark_theme_preset(bpy.types.Menu):
 
 def register():
     bpy.utils.register_class(ADMAutoDarkMode)
+    bpy.utils.register_class(ADM_update_theme)
     bpy.utils.register_class(ADM_MT_light_theme_preset)
     bpy.utils.register_class(ADM_MT_dark_theme_preset)
     bpy.utils.register_class(ADM_set_light_theme)
@@ -136,6 +156,7 @@ def register():
 
 def unregister():
     bpy.utils.unregister_class(ADMAutoDarkMode)
+    bpy.utils.unregister_class(ADM_update_theme)
     bpy.utils.unregister_class(ADM_MT_light_theme_preset)
     bpy.utils.unregister_class(ADM_MT_dark_theme_preset)
     bpy.utils.unregister_class(ADM_set_light_theme)
