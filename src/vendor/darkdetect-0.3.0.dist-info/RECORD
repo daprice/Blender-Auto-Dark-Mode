@@ -1,0 +1,17 @@
+darkdetect-0.3.0.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+darkdetect-0.3.0.dist-info/LICENSE,sha256=abuEZk7_kzrdyycchm1nYi2cLFOlvaMbGnUjVpwlCv4,1495
+darkdetect-0.3.0.dist-info/METADATA,sha256=xcZWl0K8kyNZP2m-OZTxgSAgqdBg7Bxgee3Dc923ygQ,3039
+darkdetect-0.3.0.dist-info/RECORD,,
+darkdetect-0.3.0.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+darkdetect-0.3.0.dist-info/WHEEL,sha256=OqRkF0eY5GHssMorFjlbTIq072vpHpF60fIQA6lS9xA,92
+darkdetect-0.3.0.dist-info/top_level.txt,sha256=lIG2Q43uQniIc4b-ukidPntGpjQzuFfQCYrgxeM4RVQ,11
+darkdetect/__init__.py,sha256=7a5cia9btr4SKAtfka9ese7G2tdqOJ7y_QE8mB1w4rs,1091
+darkdetect/__pycache__/__init__.cpython-39.pyc,,
+darkdetect/__pycache__/_dummy.cpython-39.pyc,,
+darkdetect/__pycache__/_linux_detect.cpython-39.pyc,,
+darkdetect/__pycache__/_mac_detect.cpython-39.pyc,,
+darkdetect/__pycache__/_windows_detect.cpython-39.pyc,,
+darkdetect/_dummy.py,sha256=pRfhFxFSaiT6DGCyhw1S3K_h45PtXqzzxi6bLGib5CQ,363
+darkdetect/_linux_detect.py,sha256=BhT-kzIhCyFKNSg0-Qd3RDNWcxygBxwWhvo__7tVNLw,924
+darkdetect/_mac_detect.py,sha256=51ZVwW0tya3upTcL5Hv3l7XnIcIbMSthzcTR1uPCWK0,1688
+darkdetect/_windows_detect.py,sha256=Z9jelgvn1bLb16hVJ3eNzZSKypi6w3gg_tK3aSF1AnQ,994

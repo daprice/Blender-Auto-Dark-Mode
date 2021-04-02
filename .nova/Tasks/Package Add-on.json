@@ -1,0 +1,9 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\n\nrm .\/Auto\\ Dark\\ Mode.zip\nTEMPORARY=$(mktemp -d)\ncp -R src $TEMPORARY\/Auto\\ Dark\\ Mode\ncd $TEMPORARY\nzip -r Auto\\ Dark\\ Mode.zip Auto\\ Dark\\ Mode\ncd -\nmv $TEMPORARY\/Auto\\ Dark\\ Mode.zip .\/"
+    }
+  },
+  "identifier" : "AC897831-5174-4785-8A28-DADBC7327D59"
+}
