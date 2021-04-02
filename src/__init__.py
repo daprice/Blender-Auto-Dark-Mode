@@ -5,6 +5,7 @@ bl_info = {
     "version": (1, 0, 0),
     "blender": (2, 90, 0),
     "category": "User Interface",
+    "warning": "Blender may take up to 60 seconds to react to theme changes. Manually changing the theme in the Themes panel may cause unexpected results."
 }
 
 import bpy
@@ -119,7 +120,7 @@ class ADM_set_dark_theme(bpy.types.Operator):
         return {'FINISHED'}
 
 class ADM_MT_light_theme_preset(bpy.types.Menu):
-    bl_label = "Light theme presets"
+    bl_label = "Change Light Mode preset…"
     preset_subdir = "interface_theme"
     preset_operator = "adm.set_light_theme"
     preset_type = 'XML'
@@ -135,7 +136,7 @@ class ADM_MT_light_theme_preset(bpy.types.Menu):
         bpy.ops.preferences.reset_default_theme()
 
 class ADM_MT_dark_theme_preset(bpy.types.Menu):
-    bl_label = "Dark theme presets"
+    bl_label = "Change Dark Mode preset…"
     preset_subdir = "interface_theme"
     preset_operator = "adm.set_dark_theme"
     preset_type = 'XML'
@@ -150,6 +151,13 @@ class ADM_MT_dark_theme_preset(bpy.types.Menu):
     def reset_cb(context):
         bpy.ops.preferences.reset_default_theme()
 
+def initial_update():
+    bpy.app.timers.register(periodic_update)
+
+def periodic_update():
+    bpy.ops.adm.update_theme()
+    return 30.0
+
 def register():
     bpy.utils.register_class(ADMAutoDarkMode)
     bpy.utils.register_class(ADM_update_theme)
@@ -157,6 +165,8 @@ def register():
     bpy.utils.register_class(ADM_MT_dark_theme_preset)
     bpy.utils.register_class(ADM_set_light_theme)
     bpy.utils.register_class(ADM_set_dark_theme)
+    
+    bpy.app.timers.register(initial_update, first_interval = 1)
 
 def unregister():
     bpy.utils.unregister_class(ADMAutoDarkMode)
@@ -165,3 +175,5 @@ def unregister():
     bpy.utils.unregister_class(ADM_MT_dark_theme_preset)
     bpy.utils.unregister_class(ADM_set_light_theme)
     bpy.utils.unregister_class(ADM_set_dark_theme)
+    
+    bpy.app.timers.unregister(periodic_update)
