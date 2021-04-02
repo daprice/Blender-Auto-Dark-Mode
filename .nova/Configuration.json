@@ -1,4 +1,5 @@
 {
+  "editor.default_syntax" : "python",
   "workspace.color" : 11,
   "workspace.name" : "Blender Auto Dark Mode"
 }
