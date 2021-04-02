@@ -84,6 +84,8 @@ class ADM_set_light_theme(bpy.types.Operator):
         
         addon_prefs.light_theme = filepath
         
+        bpy.ops.adm.update_theme()
+        
         return {'FINISHED'}
 
 class ADM_set_dark_theme(bpy.types.Operator):
@@ -111,6 +113,8 @@ class ADM_set_dark_theme(bpy.types.Operator):
         addon_prefs = preferences.addons[__name__].preferences
         
         addon_prefs.dark_theme = filepath
+        
+        bpy.ops.adm.update_theme()
         
         return {'FINISHED'}
 
