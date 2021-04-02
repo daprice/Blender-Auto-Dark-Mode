@@ -114,7 +114,7 @@ class ADM_set_light_theme(bpy.types.Operator):
         
         addon_prefs.light_theme = filepath
         
-        bpy.ops.adm.update_theme()
+        force_theme_update()
         
         return {'FINISHED'}
 
@@ -144,9 +144,7 @@ class ADM_set_dark_theme(bpy.types.Operator):
         
         addon_prefs.dark_theme = filepath
         
-        # set dark_mode_active to None so the theme gets set again to match the preference change regardless of whether light or dark was active before
-        bpy.types.WindowManager.ADM_dark_mode_active = None
-        bpy.ops.adm.update_theme()
+        force_theme_update()
         
         return {'FINISHED'}
 
@@ -183,6 +181,12 @@ class ADM_MT_dark_theme_preset(bpy.types.Menu):
     @staticmethod
     def reset_cb(context):
         bpy.ops.preferences.reset_default_theme()
+
+def force_theme_update():
+    """Apply the relevant theme to match the OS regardless of whether it was already active."""
+    # set dark_mode_active to None so the theme gets set again to match the preference change regardless of whether light or dark was active before
+    bpy.types.WindowManager.ADM_dark_mode_active = None
+    bpy.ops.adm.update_theme()
 
 def periodic_update():
     """Poll for changes to the system dark mode."""
