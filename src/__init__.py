@@ -8,6 +8,8 @@ bl_info = {
     "warning": "Blender may take up to 60 seconds to react to theme changes. Manually changing the theme in the Themes panel may cause unexpected results."
 }
 
+# TODO: see what happens if a theme set in ADM is removed and ADM tries to set it anyway
+
 import bpy
 from .vendor import darkdetect
 
@@ -45,6 +47,10 @@ class ADM_update_theme(bpy.types.Operator):
     bl_idname="adm.update_theme"
     bl_label = "Match current system theme"
     
+    dark_theme_active: bpy.props.BoolProperty(
+        options={'SKIP_SAVE'},
+    )
+    
     def execute(self, context):
         preferences = context.preferences
         addon_prefs = preferences.addons[__name__].preferences
@@ -52,10 +58,17 @@ class ADM_update_theme(bpy.types.Operator):
         light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
         dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
         
+        dark_theme_active = None if not self.dark_theme_active else self.dark_theme_active
+        
         if darkdetect.isDark():
-            bpy.ops.script.execute_preset(filepath=dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+            if dark_theme_active is None or dark_theme_active == False:
+                bpy.ops.script.execute_preset(filepath=dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+                self.dark_theme_active = True
         else:
-            bpy.ops.script.execute_preset(filepath=light_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+            
+            if dark_theme_active is None or dark_theme_active == True:
+                bpy.ops.script.execute_preset(filepath=light_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+                self.dark_theme_active = False
         
         return {'FINISHED'}
 
