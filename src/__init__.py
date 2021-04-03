@@ -65,28 +65,35 @@ class ADM_update_theme(bpy.types.Operator):
     bl_options = {'INTERNAL'}
     
     def execute(self, context):
-        preferences = context.preferences
-        addon_prefs = preferences.addons[__name__].preferences
-        
-        light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
-        dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
-        
         # print("Previously, dark theme was", bpy.types.WindowManager.ADM_dark_mode_active)
         
         if darkdetect.isDark():
             # print("OS theme is dark")
             if bpy.types.WindowManager.ADM_dark_mode_active is None or bpy.types.WindowManager.ADM_dark_mode_active == False:
                 # print("OS theme differed from blender theme, setting to dark")
-                bpy.ops.script.execute_preset(filepath=dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+                self.set_theme(False, context)
                 bpy.types.WindowManager.ADM_dark_mode_active = True
         else:
             # print("OS theme is light")
             if bpy.types.WindowManager.ADM_dark_mode_active is None or bpy.types.WindowManager.ADM_dark_mode_active == True:
                 # print("OS theme differed from blender theme, setting to light")
-                bpy.ops.script.execute_preset(filepath=light_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+                self.set_theme(True, context)
                 bpy.types.WindowManager.ADM_dark_mode_active = False
         
         return {'FINISHED'}
+    
+    def set_theme(self, light, context):
+        preferences = context.preferences
+        addon_prefs = preferences.addons[__name__].preferences
+        
+        light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
+        dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
+        
+        try:
+            bpy.ops.script.execute_preset(filepath=light_theme if light else dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+        except:
+            # use default theme if the one specified isn't found
+            bpy.ops.script.execute_preset(filepath=default_light_theme if light else default_dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
 
 class ADM_set_light_theme(bpy.types.Operator):
     """Set light theme for Auto Dark Mode"""
