@@ -19,6 +19,8 @@ When Auto Dark Mode is installed, always change your preferred light and dark th
 
 If you have made customizations to individual elements of the Blender user interface in `Preferences > Themes`, save your customizations as a preset before installing Auto Dark Mode. Otherwise, Auto Dark Mode will overwrite your changes. After installation, choose your saved preset in `Preferences > Add-ons > User Interface: Auto Dark Mode`.
 
+While customizing a theme, disable Auto Dark Mode to avoid having your changes overwritten.
+
 If you install this on a system that does not support dark mode, only the Light Mode preset within this add-on will be used.
 
 ## License
