@@ -11,7 +11,7 @@ Download the <a href="https://github.com/daprice/Blender-Auto-Dark-Mode/releases
 
 ## Usage
 
-Once activated, the add-on works automatically. You can change the themes used for light and dark mode under `Edit > Preferences > Add-ons > User Interface: Auto Dark Mode`.
+Once activated, the add-on works automatically. You can change the themes used for light and dark mode under `Edit > Preferences > Add-ons > User Interface: Auto Dark Mode` (by default, it uses the “Blender Light” and “Blender Dark” themes).
 
 ## ⚠️ Warnings
 
