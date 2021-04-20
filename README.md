@@ -1,17 +1,24 @@
 # 🌗 Blender Auto Dark Mode
-This add-on for [Blender](https://www.blender.org) lets you choose separate UI themes for light and dark mode and automatically matches the light/dark mode of your operating system. If you have your computer automatically switch between light and dark mode throughout the day, this add-on will keep Blender in sync as it changes.
+This add-on for [Blender](https://www.blender.org) lets you choose separate UI theme presets for light and dark mode and automatically matches the light/dark mode of your operating system. If you have your computer automatically switch between light and dark mode throughout the day, this add-on will keep Blender in sync as it changes.
 
-<img src="screenshot.png" alt="Side-by-side screenshots of Blender on macOS 11, showcasing the &ldquo;White&rdquo; Blender theme to match light mode and the &ldquo;Blender Dark&rdquo; theme to match dark mode." width="800" />
+<figure>
+  <img src="screenshot.png" alt="Side-by-side screenshots of Blender on macOS 11, showcasing the &ldquo;White&rdquo; Blender theme to match light mode and the &ldquo;Blender Dark&rdquo; theme to match dark mode." width="800" />
+  <figcaption>Showing off the "White" and "Blender Dark" themes (included with Blender), matching light and dark mode on macOS 11 with the help of Auto Dark Mode</figcaption>
+</figure>
 
 Auto Dark Mode will match the system light/dark mode on macOS 10.14 or newer, Windows 10, or Linux with GTK.
 
 ## Installation
 
-Download the <a href="https://github.com/daprice/Blender-Auto-Dark-Mode/releases/latest/download/Auto_Dark_Mode.zip" download>.zip package of the latest release</a> (you may need to right click and choose "Download Linked File" to avoid automatically unzipping the package). Add it to Blender using `Edit > Preferences > Add-ons > Install…`, then click the checkbox next to the add-on to activate it.
+<a href="https://github.com/daprice/Blender-Auto-Dark-Mode/releases/latest/download/Auto_Dark_Mode.zip" download>Download the .zip package of the latest release</a> (you may need to right click and choose "Download Linked File" to avoid automatically unzipping the package). Add it to Blender using `Edit > Preferences > Add-ons > Install…`, then click the checkbox next to the add-on to activate it.
 
 ## Usage
 
-Once activated, the add-on works automatically. You can change the themes used for light and dark mode under `Edit > Preferences > Add-ons > User Interface: Auto Dark Mode` (by default, it uses the “Blender Light” and “Blender Dark” themes).
+Once activated, the add-on works automatically. You can change the theme presets used for light and dark mode under `Edit > Preferences > Add-ons > User Interface: Auto Dark Mode` (by default, it uses the “Blender Light” and “Blender Dark” themes).
+
+***
+Want more themes to pick from? Look in [the Themes forum thread](https://devtalk.blender.org/t/call-for-content-themes) or [Blend Swap](https://www.blendswap.com/blends/category/22).
+***
 
 ## ⚠️ Warnings
 
