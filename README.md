@@ -1,10 +1,7 @@
 # 🌗 Blender Auto Dark Mode
 This add-on for [Blender](https://www.blender.org) lets you choose separate UI theme presets for light and dark mode and automatically matches the light/dark mode of your operating system. If you have your computer automatically switch between light and dark mode throughout the day, this add-on will keep Blender in sync as it changes.
 
-<figure>
   <img src="screenshot.png" alt="Side-by-side screenshots of Blender on macOS 11, showcasing the &ldquo;White&rdquo; Blender theme to match light mode and the &ldquo;Blender Dark&rdquo; theme to match dark mode." width="800" />
-  <figcaption>Showing off the "White" and "Blender Dark" themes (included with Blender), matching light and dark mode on macOS 11 with the help of Auto Dark Mode</figcaption>
-</figure>
 
 Auto Dark Mode will match the system light/dark mode on macOS 10.14 or newer, Windows 10, or Linux with GTK.
 
