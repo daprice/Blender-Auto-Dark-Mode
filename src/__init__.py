@@ -24,8 +24,6 @@ bl_info = {
     "tracker_url": "https://github.com/daprice/Blender-Auto-Dark-Mode/issues"
 }
 
-# TODO: see what happens if a theme set in ADM is removed and ADM tries to set it anyway
-
 import bpy
 from bpy.app.handlers import persistent
 from .vendor import darkdetect
