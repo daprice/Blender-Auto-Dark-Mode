@@ -19,7 +19,9 @@ bl_info = {
     "author": "Dale Price",
     "version": (1, 0, 0),
     "blender": (2, 90, 0),
-    "category": "User Interface"
+    "category": "User Interface",
+    "wiki_url": "https://github.com/daprice/Blender-Auto-Dark-Mode",
+    "tracker_url": "https://github.com/daprice/Blender-Auto-Dark-Mode/issues"
 }
 
 # TODO: see what happens if a theme set in ADM is removed and ADM tries to set it anyway
