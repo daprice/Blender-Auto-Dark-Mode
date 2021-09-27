@@ -4,6 +4,7 @@ darkdetect-0.5.0.dist-info/METADATA,sha256=qazcNJXAaHCi6eP1RZ9a1eWMWi0Am8UacOk3z
 darkdetect-0.5.0.dist-info/RECORD,,
 darkdetect-0.5.0.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
 darkdetect-0.5.0.dist-info/WHEEL,sha256=ewwEueio1C2XeHTvT17n8dZUJgOvyCWCt0WVNLClP9o,92
+darkdetect-0.5.0.dist-info/direct_url.json,sha256=8lMmbkkQw1l4oyMmTMmHEJopOPfhDMKzrRKDEASbtrg,137
 darkdetect-0.5.0.dist-info/top_level.txt,sha256=lIG2Q43uQniIc4b-ukidPntGpjQzuFfQCYrgxeM4RVQ,11
 darkdetect/__init__.py,sha256=mUsm1QSnIefU5DvokBaGm2tS7jZi1mhU9yP7v3lNYNE,1091
 darkdetect/__pycache__/__init__.cpython-39.pyc,,
@@ -13,5 +14,5 @@ darkdetect/__pycache__/_mac_detect.cpython-39.pyc,,
 darkdetect/__pycache__/_windows_detect.cpython-39.pyc,,
 darkdetect/_dummy.py,sha256=pRfhFxFSaiT6DGCyhw1S3K_h45PtXqzzxi6bLGib5CQ,363
 darkdetect/_linux_detect.py,sha256=ImoFtBzpOer0ii22juz-0PVZE9IiHPprOubakxEX6cg,860
-darkdetect/_mac_detect.py,sha256=kZIO7G_XSTPnhbihZYhmQYWU3-pUa4LF4HFS9amo77c,2123
+darkdetect/_mac_detect.py,sha256=WFhGYD3mkeQFh-3dwmqWjPKTt8U16uhCv_e-rdxOw2g,2159
 darkdetect/_windows_detect.py,sha256=Z9jelgvn1bLb16hVJ3eNzZSKypi6w3gg_tK3aSF1AnQ,994
