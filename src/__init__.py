@@ -17,7 +17,7 @@ bl_info = {
     "name": "Auto Dark Mode",
     "description": "Automatically follow the system light/dark mode.",
     "author": "Dale Price",
-    "version": (1, 0, 2),
+    "version": (1, 0, 3),
     "blender": (2, 90, 0),
     "category": "User Interface",
     "wiki_url": "https://github.com/daprice/Blender-Auto-Dark-Mode",

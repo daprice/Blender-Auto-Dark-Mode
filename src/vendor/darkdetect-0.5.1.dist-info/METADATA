@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: darkdetect
-Version: 0.5.0
+Version: 0.5.1
 Summary: Detect OS Dark Mode from Python
 Home-page: http://github.com/albertosottile/darkdetect
 Author: Alberto Sottile

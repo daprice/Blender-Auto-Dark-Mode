@@ -1,0 +1,17 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\npip install --target=\"$1\/src\/vendor\" darkdetect"
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nrm -r src\/vendor\/*"
+    }
+  },
+  "arguments" : [
+    "${WorkspaceFolder}"
+  ],
+  "identifier" : "E685FD49-B382-4D23-8231-EE993BA7A3AE",
+  "openLogOnRun" : "start"
+}
