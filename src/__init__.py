@@ -1,4 +1,4 @@
-# Copyright 2021 Dale Price
+# Copyright 2021-2024 Dale Price
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,16 +13,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-bl_info = {
-    "name": "Auto Dark Mode",
-    "description": "Automatically follow the system light/dark mode.",
-    "author": "Dale Price",
-    "version": (1, 0, 3),
-    "blender": (2, 90, 0),
-    "category": "User Interface",
-    "wiki_url": "https://github.com/daprice/Blender-Auto-Dark-Mode",
-    "tracker_url": "https://github.com/daprice/Blender-Auto-Dark-Mode/issues"
-}
 
 import bpy
 from bpy.app.handlers import persistent
