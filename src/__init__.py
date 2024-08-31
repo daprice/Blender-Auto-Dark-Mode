@@ -23,7 +23,7 @@ default_dark_theme = bpy.utils.preset_paths('interface_theme')[0] + "/blender_da
 
 class ADMAutoDarkMode(bpy.types.AddonPreferences):
     """Preferences for Auto Dark Mode"""
-    bl_idname = __name__
+    bl_idname = __package__
     
     light_theme: bpy.props.StringProperty(
         name="Light Mode Theme",
@@ -74,7 +74,7 @@ class ADM_update_theme(bpy.types.Operator):
     
     def set_theme(self, light, context):
         preferences = context.preferences
-        addon_prefs = preferences.addons[__name__].preferences
+        addon_prefs = preferences.addons[__package__].preferences
         
         light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
         dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
@@ -107,7 +107,7 @@ class ADM_set_light_theme(bpy.types.Operator):
         filepath = self.filepath
         
         preferences = context.preferences
-        addon_prefs = preferences.addons[__name__].preferences
+        addon_prefs = preferences.addons[__package__].preferences
         
         addon_prefs.light_theme = filepath
         
@@ -137,7 +137,7 @@ class ADM_set_dark_theme(bpy.types.Operator):
         filepath = self.filepath
         
         preferences = context.preferences
-        addon_prefs = preferences.addons[__name__].preferences
+        addon_prefs = preferences.addons[__package__].preferences
         
         addon_prefs.dark_theme = filepath
         
