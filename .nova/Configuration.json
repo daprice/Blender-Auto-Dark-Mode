@@ -1,5 +1,6 @@
 {
   "editor.default_syntax" : "python",
+  "workspace.art_style" : 1,
   "workspace.color" : 11,
   "workspace.name" : "Auto Dark Mode"
 }
