@@ -1,0 +1,8 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\n\nrm .\/Auto_Dark_Mode.zip\nTEMPORARY=$(mktemp -d)\ncp -R src $TEMPORARY\/Auto\\ Dark\\ Mode\ncd $TEMPORARY\nblender --command extension build --source-dir src\ncd -\nmv $TEMPORARY\/*.zip .\/\nrm -r $TEMPORARY"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "actions" : {
+    "run" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\n\nblender --command extension validate src"
+    }
+  },
+  "openLogOnRun" : "start"
+}
