@@ -2,7 +2,7 @@
   "actions" : {
     "build" : {
       "enabled" : true,
-      "script" : "#!\/bin\/sh\npip install --target=\"$1\/src\/vendor\" --upgrade darkdetect"
+      "script" : "#!\/bin\/sh\npip wheel 'darkdetect[macos-listener]' -w \"$1\/src\/wheels\"\npip wheel 'darkdetect[macos-listener]' -w \"$1\/src\/wheels\""
     },
     "clean" : {
       "enabled" : true,

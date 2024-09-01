@@ -1,0 +1,16 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\npip install --target=\"$1\/src\/vendor\" --upgrade darkdetect\npip install --target=\"$1\/src\/vendor\" --upgrade darkdetect[macos-listener]"
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nrm -r src\/vendor\/*"
+    }
+  },
+  "arguments" : [
+    "${WorkspaceFolder}"
+  ],
+  "openLogOnRun" : "start"
+}

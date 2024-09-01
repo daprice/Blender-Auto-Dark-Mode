@@ -16,7 +16,8 @@
 
 import bpy
 from bpy.app.handlers import persistent
-from .vendor import darkdetect
+import darkdetect
+import threading
 
 themes_paths = bpy.utils.preset_paths('interface_theme')
 
@@ -198,20 +199,39 @@ def force_theme_update():
     bpy.types.WindowManager.ADM_dark_mode_active = None
     bpy.ops.adm.update_theme()
 
-@persistent
-def periodic_update():
-    """Poll for changes to the system dark mode."""
-    bpy.ops.adm.update_theme()
-    # print("ran periodic update")
-    return 10.0
+# @persistent
+# def periodic_update():
+#     """Poll for changes to the system dark mode."""
+#     bpy.ops.adm.update_theme()
+#     # print("ran periodic update")
+#     return 10.0
+
+def receive_update(appearance):
+    """Callback for dark mode switch listener"""
+    if bpy.types.WindowManager.ADM_dark_mode_listening == True:
+        bpy.ops.adm.update_theme()
 
 def start_watching():
     """Start watching for changes, either by starting polling or by listening for changes from the OS"""
-    bpy.app.timers.register(periodic_update, persistent=True)
+    # bpy.app.timers.register(periodic_update, persistent=True)
     # print("started periodic update")
+    
+    thread = threading.Thread(target=darkdetect.listener, args=(receive_update,))
+    thread.daemon = True
+    thread.start()
+    
+    bpy.types.WindowManager.ADM_dark_mode_listening = True
+    
+    bpy.ops.adm.update_theme()
+    
+def stop_watching():
+    # bpy.app.timers.unregister(periodic_update)
+    
+    bpy.types.WindowManager.ADM_dark_mode_listening = False
 
 def register():
     bpy.types.WindowManager.ADM_dark_mode_active = None
+    bpy.types.WindowManager.ADM_dark_mode_listening = None
     
     bpy.utils.register_class(ADMAutoDarkMode)
     bpy.utils.register_class(ADM_update_theme)
@@ -220,10 +240,10 @@ def register():
     bpy.utils.register_class(ADM_set_light_theme)
     bpy.utils.register_class(ADM_set_dark_theme)
     
-    start_watching();
+    start_watching()
 
 def unregister():
-    bpy.app.timers.unregister(periodic_update)
+    stop_watching()
     
     bpy.utils.unregister_class(ADMAutoDarkMode)
     bpy.utils.unregister_class(ADM_update_theme)
