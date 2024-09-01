@@ -177,10 +177,6 @@ class ADM_MT_light_theme_preset(bpy.types.Menu):
     )
     
     draw = bpy.types.Menu.draw_preset
-    
-    @staticmethod
-    def reset_cb(context):
-        bpy.ops.preferences.reset_default_theme()
 
 class ADM_MT_dark_theme_preset(bpy.types.Menu):
     """Choose a theme preset for dark mode"""
@@ -195,10 +191,6 @@ class ADM_MT_dark_theme_preset(bpy.types.Menu):
     )
     
     draw = bpy.types.Menu.draw_preset
-    
-    @staticmethod
-    def reset_cb(context):
-        bpy.ops.preferences.reset_default_theme()
 
 def force_theme_update():
     """Apply the relevant theme to match the OS regardless of whether it was already active."""
@@ -206,17 +198,17 @@ def force_theme_update():
     bpy.types.WindowManager.ADM_dark_mode_active = None
     bpy.ops.adm.update_theme()
 
+@persistent
 def periodic_update():
     """Poll for changes to the system dark mode."""
     bpy.ops.adm.update_theme()
     # print("ran periodic update")
     return 10.0
 
-@persistent
-def reinstate_timers(dummy = None, dummy2 = None):
-    """Just setting a timer in bpy.app.timers isn't enough because apparently all timers get cleared whenever a new blend file is loaded, with no way to opt out of that behavior. This needs to get called whenever a new blend file is loaded to start the timer again."""
-    bpy.app.timers.register(periodic_update)
-    # print("reinstated periodic update")
+def start_watching():
+    """Start watching for changes, either by starting polling or by listening for changes from the OS"""
+    bpy.app.timers.register(periodic_update, persistent=True)
+    # print("started periodic update")
 
 def register():
     bpy.types.WindowManager.ADM_dark_mode_active = None
@@ -228,12 +220,9 @@ def register():
     bpy.utils.register_class(ADM_set_light_theme)
     bpy.utils.register_class(ADM_set_dark_theme)
     
-    # every time a blend file is loaded, the dark mode polling timer needs to be set up again
-    bpy.app.handlers.load_post.append(reinstate_timers)
-    reinstate_timers();
+    start_watching();
 
 def unregister():
-    bpy.app.handlers.load_post.remove(reinstate_timers)
     bpy.app.timers.unregister(periodic_update)
     
     bpy.utils.unregister_class(ADMAutoDarkMode)
