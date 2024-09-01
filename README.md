@@ -11,7 +11,7 @@ Auto Dark Mode will match the system light/dark mode on macOS 10.14 or newer, Wi
 
 ## Usage
 
-Once activated, the add-on works automatically. You can change the theme presets used for light and dark mode under `Edit > Preferences > Add-ons > User Interface: Auto Dark Mode` (by default, it uses the “Blender Light” and “Blender Dark” themes).
+Once activated, the add-on works automatically. You can change the theme presets used for light and dark mode under `Edit > Preferences > Add-ons > Auto Dark Mode` (by default, it uses the “Blender Light” and “Blender Dark” themes).
 
 ***
 Want more themes to pick from? Look in [the Themes forum thread](https://devtalk.blender.org/t/call-for-content-themes) or [Blend Swap](https://www.blendswap.com/blends/category/22).
@@ -19,9 +19,9 @@ Want more themes to pick from? Look in [the Themes forum thread](https://devtalk
 
 ## ⚠️ Warnings
 
-When Auto Dark Mode is installed, always change your preferred light and dark theme under `Preferences > Add-ons > User Interface: Auto Dark Mode`. Theme selections from `Preferences > Themes` will only last until the next light/dark mode switch occurs.
+When Auto Dark Mode is installed, always change your preferred light and dark theme under `Preferences > Add-ons > Auto Dark Mode`. Theme selections from `Preferences > Themes` will be lost when the system switches to light or dark mode.
 
-If you have made customizations to individual elements of the Blender user interface in `Preferences > Themes`, save your customizations as a preset before installing Auto Dark Mode. Otherwise, Auto Dark Mode will overwrite your changes. After installation, choose your saved preset in `Preferences > Add-ons > User Interface: Auto Dark Mode`.
+If you have made customizations to individual elements of the Blender user interface in `Preferences > Themes`, save your customizations as a preset before installing Auto Dark Mode. Otherwise, Auto Dark Mode will overwrite your changes. After installation, choose your saved preset in `Preferences > Add-ons > Auto Dark Mode`.
 
 While customizing a theme, disable Auto Dark Mode to avoid having your changes overwritten.
 
