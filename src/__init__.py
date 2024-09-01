@@ -18,8 +18,10 @@ import bpy
 from bpy.app.handlers import persistent
 from .vendor import darkdetect
 
-default_light_theme = bpy.utils.preset_paths('interface_theme')[0] + "/blender_light.xml"
-default_dark_theme = bpy.utils.preset_paths('interface_theme')[0] + "/blender_dark.xml"
+themes_paths = bpy.utils.preset_paths('interface_theme')
+
+default_light_theme = "Blender_Light.xml"
+default_dark_theme = "Blender_Dark.xml"
 
 class ADMAutoDarkMode(bpy.types.AddonPreferences):
     """Preferences for Auto Dark Mode"""
@@ -28,25 +30,23 @@ class ADMAutoDarkMode(bpy.types.AddonPreferences):
     light_theme: bpy.props.StringProperty(
         name="Light Mode Theme",
         description="Theme to use when the system is in Light Mode",
-        subtype="FILE_PATH",
+        subtype="FILE_NAME",
         default=default_light_theme
     )
     dark_theme: bpy.props.StringProperty(
         name="Dark Mode Theme",
         description="Theme to use when the system is in Dark Mode",
-        subtype="FILE_PATH",
+        subtype="FILE_NAME",
         default=default_dark_theme
     )
     
     def draw(self, context):
         layout = self.layout
         col = layout.column()
-        col.prop(self, "light_theme")
-        col.menu("ADM_MT_light_theme_preset", text=ADM_MT_light_theme_preset.bl_label)
+        col.menu("ADM_MT_light_theme_preset", text=bpy.path.display_name(context.preferences.addons[__package__].preferences.light_theme))
         
         col = layout.column()
-        col.prop(self, "dark_theme")
-        col.menu("ADM_MT_dark_theme_preset", text=ADM_MT_dark_theme_preset.bl_label)
+        col.menu("ADM_MT_dark_theme_preset", text=bpy.path.display_name(context.preferences.addons[__package__].preferences.dark_theme))
 
 class ADM_update_theme(bpy.types.Operator):
     """Update the Auto Dark Mode theme to match the OS"""
@@ -79,11 +79,26 @@ class ADM_update_theme(bpy.types.Operator):
         light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
         dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
         
-        try:
-            bpy.ops.script.execute_preset(filepath=light_theme if light else dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
-        except:
-            # use default theme if the one specified isn't found
-            bpy.ops.script.execute_preset(filepath=default_light_theme if light else default_dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+        filename = light_theme if light else dark_theme
+        
+        # look for the theme first in user themes path, then in system themes path
+        for path in reversed(themes_paths):
+            filepath = path + "/" + filename
+            try:
+                # Check whether the file exists by trying to open it (if it fails, we continue on to the next themes directory path)
+                file = open(filepath)
+                file.close()
+                
+                #if the file exists, set it and exit the loop
+                bpy.ops.script.execute_preset(filepath=filepath, menu_idname="USERPREF_MT_interface_theme_presets")
+                break
+            except:
+                continue
+        else:
+            # use default theme if the one specified isn't found in any of the preset paths
+            filename = default_light_theme if light else default_dark_theme
+            filepath = themes_paths[0] + "/" + filename
+            bpy.ops.script.execute_preset(filepath=filepath, menu_idname="USERPREF_MT_interface_theme_presets")
 
 class ADM_set_light_theme(bpy.types.Operator):
     """Set light theme for Auto Dark Mode"""
@@ -105,11 +120,12 @@ class ADM_set_light_theme(bpy.types.Operator):
     def execute(self, context):
         from os.path import basename
         filepath = self.filepath
+        filename = bpy.path.basename(filepath)
         
         preferences = context.preferences
         addon_prefs = preferences.addons[__package__].preferences
         
-        addon_prefs.light_theme = filepath
+        addon_prefs.light_theme = filename
         
         force_theme_update()
         
@@ -135,19 +151,21 @@ class ADM_set_dark_theme(bpy.types.Operator):
     def execute(self, context):
         from os.path import basename
         filepath = self.filepath
+        filename = bpy.path.basename(filepath)
         
         preferences = context.preferences
         addon_prefs = preferences.addons[__package__].preferences
         
-        addon_prefs.dark_theme = filepath
+        addon_prefs.dark_theme = filename
         
         force_theme_update()
         
         return {'FINISHED'}
 
 class ADM_MT_light_theme_preset(bpy.types.Menu):
-    """Menu for choosing a theme preset for light mode."""
+    """Choose a theme preset for light mode"""
     bl_label = "Choose from presets…"
+    bl_description = "The theme to use when the system is in light mode"
     preset_subdir = "interface_theme"
     preset_operator = "adm.set_light_theme"
     preset_type = 'XML'
@@ -163,8 +181,9 @@ class ADM_MT_light_theme_preset(bpy.types.Menu):
         bpy.ops.preferences.reset_default_theme()
 
 class ADM_MT_dark_theme_preset(bpy.types.Menu):
-    """Menu for choosing a theme preset for dark mode."""
+    """Choose a theme preset for dark mode"""
     bl_label = "Choose from presets…"
+    bl_description = "The theme to use when the system is in dark mode"
     preset_subdir = "interface_theme"
     preset_operator = "adm.set_dark_theme"
     preset_type = 'XML'
