@@ -23,9 +23,7 @@ copyright = [
 ]
 
 wheels = [
-   "./wheels/darkdetect-0.8.0-py3-none-any.whl",
-   "./wheels/pyobjc_core-10.3.1-cp310-cp310-macosx_10_9_universal2.whl",
-   "./wheels/pyobjc_framework_Cocoa-10.3.1-cp310-cp310-macosx_10_9_universal2.whl",
+  "./wheels/darkdetect-0.8.0-py3-none-any.whl",
 ]
 
 [permissions]
