@@ -13,9 +13,8 @@ Auto Dark Mode will match the system light/dark mode on macOS 10.14 or newer, Wi
 
 Once activated, the add-on works automatically. You can change the theme presets used for light and dark mode under `Edit > Preferences > Add-ons > Auto Dark Mode` (by default, it uses the “Blender Light” and “Blender Dark” themes).
 
-***
-Want more themes to pick from? Look in [the Blender themes repository](https://extensions.blender.org/themes/) or [Blend Swap](https://www.blendswap.com/blends/category/22).
-***
+> [!TIP]
+> Want more themes to pick from? Look in [the Blender themes repository](https://extensions.blender.org/themes/) or [Blend Swap](https://www.blendswap.com/blends/category/22).
 
 ## ⚠️ Warnings
 
