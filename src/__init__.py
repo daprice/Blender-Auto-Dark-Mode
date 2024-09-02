@@ -18,10 +18,10 @@ import bpy
 from bpy.app.handlers import persistent
 import darkdetect
 
-themes_paths = bpy.utils.preset_paths('interface_theme')
+default_themes_path = bpy.utils.preset_paths('interface_theme')[0]
 
-default_light_theme = "Blender_Light.xml"
-default_dark_theme = "Blender_Dark.xml"
+default_light_theme = default_themes_path + "/" + "Blender_Light.xml"
+default_dark_theme = default_themes_path + "/" + "Blender_Dark.xml"
 
 class ADMAutoDarkMode(bpy.types.AddonPreferences):
     """Preferences for Auto Dark Mode"""
@@ -30,13 +30,13 @@ class ADMAutoDarkMode(bpy.types.AddonPreferences):
     light_theme: bpy.props.StringProperty(
         name="Light Mode Theme",
         description="Theme to use when the system is in Light Mode",
-        subtype="FILE_NAME",
+        subtype="FILE_PATH",
         default=default_light_theme
     )
     dark_theme: bpy.props.StringProperty(
         name="Dark Mode Theme",
         description="Theme to use when the system is in Dark Mode",
-        subtype="FILE_NAME",
+        subtype="FILE_PATH",
         default=default_dark_theme
     )
     
@@ -80,26 +80,11 @@ class ADM_update_theme(bpy.types.Operator):
         light_theme = default_light_theme if not addon_prefs.light_theme else addon_prefs.light_theme
         dark_theme = default_dark_theme if not addon_prefs.dark_theme else addon_prefs.dark_theme
         
-        filename = light_theme if light else dark_theme
-        
-        # look for the theme first in user themes path, then in system themes path
-        for path in reversed(themes_paths):
-            filepath = path + "/" + filename
-            try:
-                # Check whether the file exists by trying to open it (if it fails, we continue on to the next themes directory path)
-                file = open(filepath)
-                file.close()
-                
-                #if the file exists, set it and exit the loop
-                bpy.ops.script.execute_preset(filepath=filepath, menu_idname="USERPREF_MT_interface_theme_presets")
-                break
-            except:
-                continue
-        else:
-            # use default theme if the one specified isn't found in any of the preset paths
-            filename = default_light_theme if light else default_dark_theme
-            filepath = themes_paths[0] + "/" + filename
-            bpy.ops.script.execute_preset(filepath=filepath, menu_idname="USERPREF_MT_interface_theme_presets")
+        try:
+           bpy.ops.script.execute_preset(filepath=light_theme if light else dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
+        except:
+           # use default theme if the one specified isn't found
+           bpy.ops.script.execute_preset(filepath=default_light_theme if light else default_dark_theme, menu_idname="USERPREF_MT_interface_theme_presets")
 
 class ADM_set_light_theme(bpy.types.Operator):
     """Set light theme for Auto Dark Mode"""
@@ -121,12 +106,11 @@ class ADM_set_light_theme(bpy.types.Operator):
     def execute(self, context):
         from os.path import basename
         filepath = self.filepath
-        filename = bpy.path.basename(filepath)
         
         preferences = context.preferences
         addon_prefs = preferences.addons[__package__].preferences
         
-        addon_prefs.light_theme = filename
+        addon_prefs.light_theme = filepath
         
         force_theme_update()
         
@@ -152,12 +136,11 @@ class ADM_set_dark_theme(bpy.types.Operator):
     def execute(self, context):
         from os.path import basename
         filepath = self.filepath
-        filename = bpy.path.basename(filepath)
         
         preferences = context.preferences
         addon_prefs = preferences.addons[__package__].preferences
         
-        addon_prefs.dark_theme = filename
+        addon_prefs.dark_theme = filepath
         
         force_theme_update()
         
@@ -222,6 +205,12 @@ def register():
     bpy.utils.register_class(ADM_set_light_theme)
     bpy.utils.register_class(ADM_set_dark_theme)
     
+    # apparently this is needed to be able to use themes installed via Extensions?
+    # based on code from https://github.com/venomgfx/auto-switch-theme/blob/main/__init__.py (copyright Pablo Vazquez, also licensed GPLv3)
+    from bl_pkg import theme_preset_draw
+    ADM_MT_light_theme_preset.append(theme_preset_draw)
+    ADM_MT_dark_theme_preset.append(theme_preset_draw)
+    
     start_watching()
 
 def unregister():
@@ -233,3 +222,7 @@ def unregister():
     bpy.utils.unregister_class(ADM_MT_dark_theme_preset)
     bpy.utils.unregister_class(ADM_set_light_theme)
     bpy.utils.unregister_class(ADM_set_dark_theme)
+    
+    from bl_pkg import theme_preset_draw
+    ADM_MT_light_theme_preset.remove(theme_preset_draw)
+    ADM_MT_dark_theme_preset.remove(theme_preset_draw)
