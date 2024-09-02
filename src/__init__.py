@@ -43,7 +43,7 @@ class ADMAutoDarkMode(bpy.types.AddonPreferences):
     def draw(self, context):
         layout = self.layout
         col = layout.column()
-        row = col.row(heading="☀️ Light Mode Theme")
+        row = col.row(heading="☼ Light Mode Theme")
         row.menu("ADM_MT_light_theme_preset", text=bpy.path.display_name(context.preferences.addons[__package__].preferences.light_theme))
         
         row = col.row(heading="🌙 Dark Mode Theme")
