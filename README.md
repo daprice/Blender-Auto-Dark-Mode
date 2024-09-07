@@ -7,6 +7,9 @@ Auto Dark Mode will match the system light/dark mode on macOS 10.14 or newer, Wi
 
 ## Installation
 
+[Install from the Blender Extensions platform](https://extensions.blender.org/add-ons/auto-dark-mode/), or perform a manual installation using the following instructions:
+
+### Manual Installation
 <a href="https://github.com/daprice/Blender-Auto-Dark-Mode/releases/latest/download/Auto_Dark_Mode.zip" download>Download the .zip package of the latest release</a> (you may need to right click and choose "Download Linked File" to avoid automatically unzipping the package). Drag and drop the .zip file into a Blender window to install it, or use `Edit > Preferences > Get Extensions > Install from Disk…`.
 
 ## Usage
